@@ -8,17 +8,22 @@ import com.iwp.simpletimer.databinding.ActivityMainBinding
 import java.util.*
 import kotlin.concurrent.timer
 import kotlin.math.min
+
 //ViewBinding
 lateinit var binding: ActivityMainBinding
+
 //if timer active this variable will be true, else false
 var isRun = false
+
 //just for easy-access map names
 const val seconds = "seconds"
 const val minutes = "minutes"
 const val hours = "hours"
+
 //time(in seconds) for timer
-var timerSeconds=3690
-lateinit var timer:CountDownTimer
+var timerSeconds = 3690
+lateinit var timer: CountDownTimer
+
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,12 +36,12 @@ class MainActivity : AppCompatActivity() {
     fun goOrStopTimer(view: View) {
         if (isRun) {
             timer.cancel()
-            binding.timeTv.text="00:00:00"
-            binding.goOrStopTimer.text="start"
-            isRun=false
+            binding.timeTv.text = "00:00:00"
+            binding.goOrStopTimer.text = "start"
+            isRun = false
         } else {
             //start or resume timer
-            timer=object : CountDownTimer(secToMSec(timerSeconds), secToMSec(1)) {
+            timer = object : CountDownTimer(secToMSec(timerSeconds), secToMSec(1)) {
                 override fun onTick(millisUntilFinished: Long) {
                     val time = getNormalTime(mSecToSec(millisUntilFinished))
                     val dateString = String.format(
@@ -55,8 +60,8 @@ class MainActivity : AppCompatActivity() {
                 }
 
             }.start()
-            binding.goOrStopTimer.text="stop"
-            isRun=true
+            binding.goOrStopTimer.text = "stop"
+            isRun = true
         }
     }
 
